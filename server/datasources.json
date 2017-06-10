@@ -1,0 +1,11 @@
+{
+  "db": {
+    "url": "https://8d290367-acfb-4f45-bc0f-ea25c73abded-bluemix:899f8d23e4c5d9745170a654da11674aa8f3421c0848a542ebe01a7f156636f3@8d290367-acfb-4f45-bc0f-ea25c73abded-bluemix.cloudant.com",
+    "database": "cattown",
+    "username": "",
+    "password": "",
+    "name": "db",
+    "modelIndex": "",
+    "connector": "cloudant"
+  }
+}

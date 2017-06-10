@@ -38,5 +38,9 @@
   "cat": {
     "dataSource": "db",
     "public": true
+  },
+  "human": {
+    "dataSource": "db",
+    "public": true
   }
 }

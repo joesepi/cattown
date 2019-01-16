@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>cattown</title>
+  </head>
+  <body>
+    <h1>Cat Town</h1>
+
+    <form>
+      <input type="file" name="upl" id="uploadInput" />
+      <button id="upload">Upload</button>
+    </form>
+  </body>
+  <script src="/assets/js/jquery-3.2.1.min.js"></script>
+  <script>
+    let file;
+    let fileErr;
+    const fileErrSize = 'image needs to be less than 1mb, please';
+    const fileErrType = 'file needs to be an image, please';
+    const uploadInput = document.getElementById('uploadInput');
+    const uploadBtn = document.getElementById('upload');
+
+    const prepFile = function(e) {
+      e.preventDefault();
+      eFile = e.target.files[0];
+
+      if(!eFile.type.match('image.*')) {
+        fileErr = fileErrType;
+        alert(fileErrType);
+      }
+      else if (eFile.size > 1048576) {
+        fileErr = fileErrSize;
+        alert(fileErrSize);
+      }
+      else {
+        fileErr = null;
+        file = eFile;
+      }
+    }
+
+    const uploadFile = function(e) {
+      e.preventDefault();
+      // do the ajax thing here
+      if (fileErr) {
+        alert(fileErr);
+      }
+      else {
+        console.log(file);
+        const catImgUrl = 'http://0.0.0.0:3000/api/catImages/cattown-catimage/upload?access_token=zQfZEuBO4NleN7pH0uKdKBGnggJBHekAJJlJ8JGe3ziPnqeVvcN4VCaDC06G06xM';
+        var jqxhr = $.post( catImgUrl, (data) => {
+          console.log('anon success')
+          console.log(data)
+        })
+          .done(function() {
+            console.log('success')
+          })
+          .fail(function() {
+            console.log('fail')
+          })
+          .always(function() {
+            console.log('always')
+          });
+      }
+    }
+
+    uploadInput.onchange = prepFile;
+    uploadBtn.onclick = uploadFile;
+  </script>
+</html>
+

@@ -37,10 +37,23 @@
   },
   "cat": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "find": true
+        }
+      }
+    }
   },
   "human": {
     "dataSource": "db",
+    "public": true
+  },
+  "catImage": {
+    "dataSource": "catImage",
     "public": true
   }
 }

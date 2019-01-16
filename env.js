@@ -1,15 +1,15 @@
-let VCAP;
+let ENV;
 
 // PRODUCTION CREDENTIALS
 // Check for VCAP_SERVICES on the server
 if (process.env.VCAP_SERVICES) {
-  VCAP = JSON.parse(process.env.VCAP_SERVICES);
+  ENV = JSON.parse(process.env);
 }
 // LOCAL DEVELOPMENT
 // Check for local credentials; log error if it fails
 else {
   try {
-    VCAP = require('./env.json');
+    ENV = require('./env.json');
   } catch (e) {
     console.error(e);
   }
@@ -18,11 +18,18 @@ else {
 // Export our data-sources for convenience
 let DATASOURCES = {
   "db": {
-    "url": VCAP.cloudantNoSQLDB[0].credentials.url,
-    "database": "band-app",
+    "url": ENV.VCAP_SERVICES.cloudantNoSQLDB[0].credentials.url,
+    "database": "cattown",
     "name": "db",
     "connector": "cloudant"
+  },
+  "catImage": {
+    "name": "catImage",
+    "connector": "loopback-component-storage",
+    "provider": "amazon",
+    "key": ENV.CATTOWNS3KEY,
+    "keyId": ENV.CATTOWNS3KEYID
   }
 };
 
-module.exports = { VCAP, DATASOURCES };
+module.exports = { ENV, DATASOURCES };

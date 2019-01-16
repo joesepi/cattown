@@ -1,1 +1,3 @@
 env.json
+server/env.json
+server/env_custom.json
